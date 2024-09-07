@@ -1,6 +1,7 @@
 r"""
 Tests for QtAwesome.
 """
+
 # Standard library imports
 import collections
 import os
@@ -16,8 +17,9 @@ import qtawesome as qta
 
 
 def test_segfault_import():
-    output_number = subprocess.call(sys.executable + ' -c "import qtawesome '
-                                    '; qtawesome.icon()"', shell=True)
+    output_number = subprocess.call(
+        sys.executable + ' -c "import qtawesome ' '; qtawesome.icon()"', shell=True
+    )
     assert output_number == 0
 
 
@@ -38,8 +40,11 @@ def test_unique_font_family_name(qtbot):
     assert fontnames
 
     # Check that qtawesome does not load fonts with duplicate family names.
-    duplicates = [fontname for fontname, count in
-                  collections.Counter(fontnames).items() if count > 1]
+    duplicates = [
+        fontname
+        for fontname, count in collections.Counter(fontnames).items()
+        if count > 1
+    ]
     assert not duplicates
 
 
@@ -47,7 +52,7 @@ def test_unique_font_family_name(qtbot):
 def test_bundled_font_installation():
     """
     Test that the bundled fonts are being installed on Windows.
-    
+
     See spyder-ide/qtawesome#167 and spyder-ide/spyder#18642
     """
     qta._instance()
@@ -57,7 +62,7 @@ def test_bundled_font_installation():
     ]
     fonts_command = [
         "powershell.exe",
-        r'Get-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"'
+        r'Get-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"',
     ]
     fonts_result = subprocess.run(
         fonts_command, capture_output=True, check=True, text=True
