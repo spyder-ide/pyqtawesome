@@ -27,8 +27,8 @@ SOFTWARE.
 from qtpy.QtGui import QPalette, QColor
 
 # Constant to reference default themes
-DEFAULT_DARK_PALETTE = 'Dark'
-DEFAULT_LIGHT_PALETTE = 'Light'
+DEFAULT_DARK_PALETTE = "Dark"
+DEFAULT_LIGHT_PALETTE = "Light"
 
 
 def dark(app):
@@ -62,21 +62,18 @@ def dark(app):
     dark_palette.setColor(QPalette.LinkVisited, QColor(80, 80, 80))
 
     # disabled
-    dark_palette.setColor(QPalette.Disabled, QPalette.WindowText,
-                         QColor(127, 127, 127))
-    dark_palette.setColor(QPalette.Disabled, QPalette.Text,
-                         QColor(127, 127, 127))
-    dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText,
-                         QColor(127, 127, 127))
-    dark_palette.setColor(QPalette.Disabled, QPalette.Highlight,
-                         QColor(80, 80, 80))
-    dark_palette.setColor(QPalette.Disabled, QPalette.HighlightedText,
-                         QColor(127, 127, 127))
+    dark_palette.setColor(QPalette.Disabled, QPalette.WindowText, QColor(127, 127, 127))
+    dark_palette.setColor(QPalette.Disabled, QPalette.Text, QColor(127, 127, 127))
+    dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText, QColor(127, 127, 127))
+    dark_palette.setColor(QPalette.Disabled, QPalette.Highlight, QColor(80, 80, 80))
+    dark_palette.setColor(
+        QPalette.Disabled, QPalette.HighlightedText, QColor(127, 127, 127)
+    )
 
     app.style().unpolish(app)
     app.setPalette(dark_palette)
 
-    app.setStyle('Fusion')
+    app.setStyle("Fusion")
 
 
 def light(app):
@@ -110,18 +107,19 @@ def light(app):
     light_palette.setColor(QPalette.LinkVisited, QColor(222, 222, 222))
 
     # disabled
-    light_palette.setColor(QPalette.Disabled, QPalette.WindowText,
-                          QColor(115, 115, 115))
-    light_palette.setColor(QPalette.Disabled, QPalette.Text,
-                          QColor(115, 115, 115))
-    light_palette.setColor(QPalette.Disabled, QPalette.ButtonText,
-                          QColor(115, 115, 115))
-    light_palette.setColor(QPalette.Disabled, QPalette.Highlight,
-                          QColor(190, 190, 190))
-    light_palette.setColor(QPalette.Disabled, QPalette.HighlightedText,
-                          QColor(115, 115, 115))
+    light_palette.setColor(
+        QPalette.Disabled, QPalette.WindowText, QColor(115, 115, 115)
+    )
+    light_palette.setColor(QPalette.Disabled, QPalette.Text, QColor(115, 115, 115))
+    light_palette.setColor(
+        QPalette.Disabled, QPalette.ButtonText, QColor(115, 115, 115)
+    )
+    light_palette.setColor(QPalette.Disabled, QPalette.Highlight, QColor(190, 190, 190))
+    light_palette.setColor(
+        QPalette.Disabled, QPalette.HighlightedText, QColor(115, 115, 115)
+    )
 
     app.style().unpolish(app)
     app.setPalette(light_palette)
 
-    app.setStyle('Fusion')
+    app.setStyle("Fusion")

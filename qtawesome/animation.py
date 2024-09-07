@@ -2,7 +2,6 @@ from qtpy.QtCore import QTimer
 
 
 class Spin:
-
     def __init__(self, parent_widget, interval=10, step=1, autostart=True):
         self.parent_widget = parent_widget
         self.interval = interval
@@ -23,7 +22,6 @@ class Spin:
             self.parent_widget.update()
 
     def setup(self, icon_painter, painter, rect):
-
         if self.parent_widget not in self.info:
             timer = QTimer(self.parent_widget)
             timer.timeout.connect(self._update)
@@ -48,11 +46,5 @@ class Spin:
 
 
 class Pulse(Spin):
-
     def __init__(self, parent_widget, autostart=True):
-        super().__init__(
-            parent_widget,
-            interval=300,
-            step=45,
-            autostart=autostart
-        )
+        super().__init__(parent_widget, interval=300, step=45, autostart=autostart)
