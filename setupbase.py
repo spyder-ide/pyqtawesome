@@ -67,7 +67,7 @@ def rename_font(font_path, font_name):
     # write changes to the font file
     try:
         tt.save(font_path, reorderTables=False)
-    except:
+    except Exception:
         raise RuntimeError(
             f"ERROR: unable to write new name to OpenType tables for: {font_path}")
 

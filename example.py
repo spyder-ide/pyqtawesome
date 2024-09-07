@@ -221,7 +221,7 @@ def main():
         try:
             key, val = arg.split('=', maxsplit=1)
             global_defaults[key] = val
-        except:
+        except Exception:
             pass
     if global_defaults:
         qta.set_global_defaults(**global_defaults)

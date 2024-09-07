@@ -23,11 +23,11 @@ import os
 from qtpy import QtCore, QtWidgets, QtGui
 
 # Local imports
-from ._version import __version__, version_info
-from .animation import Pulse, Spin
+from ._version import __version__ as __version__, version_info as version_info
+from .animation import Pulse as Pulse, Spin as Spin
 from .iconic_font import IconicFont, set_global_defaults, FontError
 from .iconic_font import SYSTEM_FONTS as _SYSTEM_FONTS
-from .styles import dark, light
+from .styles import dark as dark, light as light
 
 # Constants
 _resource = { 'iconic': None }
