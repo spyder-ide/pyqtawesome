@@ -27,7 +27,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v1
       - name: Install Conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
            activate-environment: test
            auto-update-conda: false
