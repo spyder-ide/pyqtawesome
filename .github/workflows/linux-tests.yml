@@ -32,7 +32,7 @@ jobs:
           sudo apt-get update --fix-missing
           sudo apt-get install -qq pyqt5-dev-tools libxcb-xinerama0 xterm --fix-missing
       - name: Install Conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
            activate-environment: test
            auto-update-conda: false
@@ -57,7 +57,9 @@ jobs:
           xvfb-run --auto-servernum python example.py
           xvfb-run --auto-servernum pytest -x -vv --cov-report xml --cov=qtawesome qtawesome
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: true
           verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
