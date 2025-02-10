@@ -168,9 +168,9 @@ class UpdateFA5Command(setuptools.Command):
                             files[style] = compressed_file.read()
 
         # Safety checks:
-        assert all(
-            style in files for style in self.FA_STYLES
-        ), "Not all FA styles found! Update code is broken."
+        assert all(style in files for style in self.FA_STYLES), (
+            "Not all FA styles found! Update code is broken."
+        )
         assert "icons.json" in files, "icons.json not found! Update code is broken."
 
         return files

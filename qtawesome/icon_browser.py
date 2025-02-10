@@ -60,7 +60,7 @@ class IconBrowser(QtWidgets.QMainWindow):
         # Filter section
         self._comboFont = QtWidgets.QComboBox(self)
         self._comboFont.setToolTip(
-            "Select the font prefix whose icons will " "be included in the filtering."
+            "Select the font prefix whose icons will be included in the filtering."
         )
         self._comboFont.setMaximumWidth(75)
         self._comboFont.addItems([ALL_COLLECTIONS] + sorted(fontMaps.keys()))
