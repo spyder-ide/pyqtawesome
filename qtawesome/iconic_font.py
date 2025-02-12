@@ -383,9 +383,7 @@ class IconicFont(QObject):
                 # Try to load font from system Fonts directory
                 windows_dir = os.environ.get("WINDIR")
                 if windows_dir:
-                    from_system_ttf = os.path.join(
-                        windows_dir, "Fonts", ttf_filename
-                    )
+                    from_system_ttf = os.path.join(windows_dir, "Fonts", ttf_filename)
                     id_ = QFontDatabase.addApplicationFont(from_system_ttf)
 
             loadedFontFamilies = QFontDatabase.applicationFontFamilies(id_)
