@@ -80,8 +80,10 @@ def test_get_fonts_info():
         for _prefix, font_filename, _charmap_filename in qta._BUNDLED_FONTS
     ]
     fonts_root_dir, fonts_list = qta.get_fonts_info()
-    assert fonts_root_dir == os.path.join(
-        os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts"
+    assert os.path.normcase(fonts_root_dir) == os.path.normcase(
+        os.path.join(
+            os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts"
+        )
     )
     assert set(fonts_list) == set(fonts_expected)
 
