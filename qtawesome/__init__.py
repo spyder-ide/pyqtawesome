@@ -81,6 +81,19 @@ _MD5_HASHES = {
 }
 
 
+def get_fonts_info():
+    """
+    Return tuple with information about the bundled fonts being used.
+
+    Tuple contains fonts directory path and a list with the fonts filenames.
+    """
+    fonts_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fonts")
+    return (
+        fonts_directory,
+        [entry for entry in os.listdir(fonts_directory) if entry.endswith(".ttf")],
+    )
+
+
 def has_valid_font_ids(inst):
     """Validate instance's font ids are loaded to QFontDatabase.
 

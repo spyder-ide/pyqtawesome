@@ -71,5 +71,20 @@ def test_bundled_font_installation():
         assert font_filename in fonts_result
 
 
+def test_get_fonts_info():
+    """
+    Test that you can get the info of all the bundled fonts.
+    """
+    fonts_expected = [
+        font_filename
+        for _prefix, font_filename, _charmap_filename in qta._BUNDLED_FONTS
+    ]
+    fonts_root_dir, fonts_list = qta.get_fonts_info()
+    assert fonts_root_dir == os.path.join(
+        os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts"
+    )
+    assert set(fonts_list) == set(fonts_expected)
+
+
 if __name__ == "__main__":
     pytest.main()
