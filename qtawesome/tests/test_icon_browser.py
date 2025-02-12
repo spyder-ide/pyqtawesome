@@ -24,6 +24,7 @@ def test_browser_init(browser):
     """
     Ensure the browser opens without error
     """
+
     def close():
         browser.close()
 
@@ -39,19 +40,21 @@ def test_copy(qtbot, browser):
     """
     clipboard = QtWidgets.QApplication.instance().clipboard()
 
-    clipboard.setText('')
+    clipboard.setText("")
 
     assert clipboard.text() == ""
 
     # Enter a search term and press enter
-    qtbot.keyClicks(browser._lineEditFilter, 'penguin')
+    qtbot.keyClicks(browser._lineEditFilter, "penguin")
     qtbot.keyPress(browser._lineEditFilter, QtCore.Qt.Key_Enter)
 
     # TODO: Figure out how to do this via a qtbot.mouseClick call
     # Select the first item in the list
     model = browser._listView.model()
     selectionModel = browser._listView.selectionModel()
-    selectionModel.setCurrentIndex(model.index(0, 0), QtCore.QItemSelectionModel.ClearAndSelect)
+    selectionModel.setCurrentIndex(
+        model.index(0, 0), QtCore.QItemSelectionModel.ClearAndSelect
+    )
 
     # Click the copy button
     qtbot.mouseClick(browser._copyButton, QtCore.Qt.LeftButton)
@@ -67,7 +70,7 @@ def test_filter(qtbot, browser):
     assert initRowCount > 0
 
     # Enter a search term and click
-    qtbot.keyClicks(browser._lineEditFilter, 'penguin')
+    qtbot.keyClicks(browser._lineEditFilter, "penguin")
     qtbot.keyPress(browser._lineEditFilter, QtCore.Qt.Key_Enter)
 
     filteredRowCount = browser._listView.model().rowCount()
@@ -82,7 +85,7 @@ def test_filter_no_results(qtbot, browser):
     assert initRowCount > 0
 
     # Enter a search term
-    qtbot.keyClicks(browser._lineEditFilter, 'I-AM-NOT-penguin-A-penguin')
+    qtbot.keyClicks(browser._lineEditFilter, "I-AM-NOT-penguin-A-penguin")
 
     # Press Enter to perform the filter
     qtbot.keyPress(browser._lineEditFilter, QtCore.Qt.Key_Enter)

@@ -1,4 +1,3 @@
-
 import sys
 
 from qtpy import QtCore, QtGui, QtWidgets
@@ -11,7 +10,7 @@ import qtawesome
 DEFAULT_VIEW_COLUMNS = 5
 VIEW_COLUMNS_OPTIONS = [5, 8, 10, 15, 20, 25, 30]
 AUTO_SEARCH_TIMEOUT = 500
-ALL_COLLECTIONS = 'All'
+ALL_COLLECTIONS = "All"
 
 
 class IconBrowser(QtWidgets.QMainWindow):
@@ -25,15 +24,15 @@ class IconBrowser(QtWidgets.QMainWindow):
         super().__init__()
 
         qtawesome._instance()
-        fontMaps = qtawesome._resource['iconic'].charmap
+        fontMaps = qtawesome._resource["iconic"].charmap
 
         iconNames = []
         for fontCollection, fontData in fontMaps.items():
             for iconName in fontData:
-                iconNames.append('%s.%s' % (fontCollection, iconName))
+                iconNames.append("%s.%s" % (fontCollection, iconName))
 
         self.setMinimumSize(300, 300)
-        self.setWindowTitle('QtAwesome Icon Browser')
+        self.setWindowTitle("QtAwesome Icon Browser")
         self.setWindowIcon(qtawesome.icon("fa5s.icons"))
 
         self._filterTimer = QtCore.QTimer(self)
@@ -54,23 +53,18 @@ class IconBrowser(QtWidgets.QMainWindow):
         self._listView.setModel(self._proxyModel)
         self._listView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self._listView.doubleClicked.connect(self._copyIconText)
-        self._listView.selectionModel().selectionChanged.connect(
-            self._updateNameField
-        )
+        self._listView.selectionModel().selectionChanged.connect(self._updateNameField)
 
         toolbar = QtWidgets.QHBoxLayout()
 
         # Filter section
         self._comboFont = QtWidgets.QComboBox(self)
         self._comboFont.setToolTip(
-            "Select the font prefix whose icons will "
-            "be included in the filtering."
+            "Select the font prefix whose icons will " "be included in the filtering."
         )
         self._comboFont.setMaximumWidth(75)
         self._comboFont.addItems([ALL_COLLECTIONS] + sorted(fontMaps.keys()))
-        self._comboFont.currentIndexChanged.connect(
-            self._triggerImmediateUpdate
-        )
+        self._comboFont.currentIndexChanged.connect(self._triggerImmediateUpdate)
         toolbar.addWidget(self._comboFont)
 
         self._lineEditFilter = QtWidgets.QLineEdit(self)
@@ -79,9 +73,7 @@ class IconBrowser(QtWidgets.QMainWindow):
         self._lineEditFilter.setToolTip("Filter icons by name")
         self._lineEditFilter.setAlignment(QtCore.Qt.AlignLeft)
         self._lineEditFilter.textChanged.connect(self._triggerDelayedUpdate)
-        self._lineEditFilter.returnPressed.connect(
-            self._triggerImmediateUpdate
-        )
+        self._lineEditFilter.returnPressed.connect(self._triggerImmediateUpdate)
         self._lineEditFilter.setClearButtonEnabled(True)
         toolbar.addWidget(self._lineEditFilter, stretch=10)
 
@@ -99,7 +91,7 @@ class IconBrowser(QtWidgets.QMainWindow):
         self._nameField.setFont(fnt)
         toolbar.addWidget(self._nameField, stretch=10)
 
-        self._copyButton = QtWidgets.QPushButton('Copy Name', self)
+        self._copyButton = QtWidgets.QPushButton("Copy Name", self)
         self._copyButton.setToolTip(
             "Copy selected icon full identifier to the clipboard"
         )
@@ -298,7 +290,6 @@ class IconListView(QtWidgets.QListView):
 
 
 class IconModel(QtCore.QStringListModel):
-
     def __init__(self):
         super().__init__()
 
@@ -337,5 +328,5 @@ def run():
     sys.exit(app.exec_())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run()

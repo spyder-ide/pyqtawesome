@@ -12,7 +12,7 @@ jobs:
   macos:
     name: Mac Py${{ matrix.PYTHON_VERSION }} - ${{ matrix.QT_BINDING }}
     timeout-minutes: 15
-    runs-on: macos-latest
+    runs-on: macos-13
     env:
       CI: True
       QT_API:  ${{ matrix.QT_BINDING }}
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v1
       - name: Install Conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
            activate-environment: test
            auto-update-conda: false
@@ -52,7 +52,10 @@ jobs:
           python example.py
           pytest -x -vv --cov-report xml --cov=qtawesome qtawesome
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: true
           verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+

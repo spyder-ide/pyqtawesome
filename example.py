@@ -11,129 +11,138 @@ import qtawesome as qta
 
 
 class AwesomeExample(QtWidgets.QDialog):
-
     def __init__(self):
         super().__init__()
 
         # Label for supported fonts
-        supported_fonts_label = QtWidgets.QLabel('Supported fonts (prefix)')
+        supported_fonts_label = QtWidgets.QLabel("Supported fonts (prefix)")
         supported_fonts_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # Get FontAwesome 5.x icons by name in various styles by name
-        fa5_icon = qta.icon('fa5.flag')
-        fa5_button = QtWidgets.QPushButton(fa5_icon, 'Font Awesome regular (fa5)')
+        fa5_icon = qta.icon("fa5.flag")
+        fa5_button = QtWidgets.QPushButton(fa5_icon, "Font Awesome regular (fa5)")
 
-        fa5s_icon = qta.icon('fa5s.flag')
-        fa5s_button = QtWidgets.QPushButton(fa5s_icon, 'Font Awesome solid (fa5s)')
+        fa5s_icon = qta.icon("fa5s.flag")
+        fa5s_button = QtWidgets.QPushButton(fa5s_icon, "Font Awesome solid (fa5s)")
 
-        fa5b_icon = qta.icon('fa5b.github')
-        fa5b_button = QtWidgets.QPushButton(fa5b_icon, 'Font Awesome brands (fa5b)')
+        fa5b_icon = qta.icon("fa5b.github")
+        fa5b_button = QtWidgets.QPushButton(fa5b_icon, "Font Awesome brands (fa5b)")
 
         # Get Elusive icons by name
-        asl_icon = qta.icon('ei.asl')
-        elusive_button = QtWidgets.QPushButton(asl_icon, 'Elusive Icons (ei)')
+        asl_icon = qta.icon("ei.asl")
+        elusive_button = QtWidgets.QPushButton(asl_icon, "Elusive Icons (ei)")
 
         # Get Material Design icons by name
-        apn_icon = qta.icon('mdi6.access-point-network')
-        mdi6_button = QtWidgets.QPushButton(apn_icon, 'Material Design (mdi, mdi6)')
+        apn_icon = qta.icon("mdi6.access-point-network")
+        mdi6_button = QtWidgets.QPushButton(apn_icon, "Material Design (mdi, mdi6)")
 
         # Get Phosphor by name
-        mic_icon = qta.icon('ph.microphone-fill')
-        ph_button = QtWidgets.QPushButton(mic_icon, 'Phosphor Icons (ph)')
+        mic_icon = qta.icon("ph.microphone-fill")
+        ph_button = QtWidgets.QPushButton(mic_icon, "Phosphor Icons (ph)")
 
         # Get Remix Icon by name
-        truck_icon = qta.icon('ri.truck-fill')
-        ri_button = QtWidgets.QPushButton(truck_icon, 'Remix Icons (ri)')
+        truck_icon = qta.icon("ri.truck-fill")
+        ri_button = QtWidgets.QPushButton(truck_icon, "Remix Icons (ri)")
 
         # Get Microsoft's Codicons by name
-        squirrel_icon = qta.icon('msc.squirrel')
-        msc_button = QtWidgets.QPushButton(squirrel_icon, 'Codicons (msc)')
+        squirrel_icon = qta.icon("msc.squirrel")
+        msc_button = QtWidgets.QPushButton(squirrel_icon, "Codicons (msc)")
 
         # Label for style options and animations
-        styles_label = QtWidgets.QLabel('Styles')
+        styles_label = QtWidgets.QLabel("Styles")
         styles_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # Rotated
-        rot_icon = qta.icon('mdi.access-point-network', rotated=45)
-        rot_button = QtWidgets.QPushButton(rot_icon, 'Rotated Icons')
+        rot_icon = qta.icon("mdi.access-point-network", rotated=45)
+        rot_button = QtWidgets.QPushButton(rot_icon, "Rotated Icons")
 
         # Horizontal flip
-        hflip_icon = qta.icon('mdi.account-alert', hflip=True)
-        hflip_button = QtWidgets.QPushButton(hflip_icon, 'Horizontally Flipped Icons')
+        hflip_icon = qta.icon("mdi.account-alert", hflip=True)
+        hflip_button = QtWidgets.QPushButton(hflip_icon, "Horizontally Flipped Icons")
 
         # Vertical flip
-        vflip_icon = qta.icon('mdi.account-alert', vflip=True)
-        vflip_button = QtWidgets.QPushButton(vflip_icon, 'Vertically Flipped Icons')
+        vflip_icon = qta.icon("mdi.account-alert", vflip=True)
+        vflip_button = QtWidgets.QPushButton(vflip_icon, "Vertically Flipped Icons")
 
         # Styling
-        styling_icon = qta.icon('fa5s.music',
-                                active='fa5s.balance-scale',
-                                color='blue',
-                                color_active='orange')
-        music_button = QtWidgets.QPushButton(styling_icon, 'Changing colors')
+        styling_icon = qta.icon(
+            "fa5s.music",
+            active="fa5s.balance-scale",
+            color="blue",
+            color_active="orange",
+        )
+        music_button = QtWidgets.QPushButton(styling_icon, "Changing colors")
 
         # Setting an alpha of 165 to the color of this icon. Alpha must be a number
         # between 0 and 255.
-        icon_with_alpha = qta.icon('mdi.heart', color=('red', 120))
-        heart_button = QtWidgets.QPushButton(icon_with_alpha, 'Setting alpha')
+        icon_with_alpha = qta.icon("mdi.heart", color=("red", 120))
+        heart_button = QtWidgets.QPushButton(icon_with_alpha, "Setting alpha")
 
         # Toggle
-        toggle_icon = qta.icon('fa5s.home', selected='fa5s.balance-scale',
-                               color_off='black',
-                               color_off_active='blue',
-                               color_on='orange',
-                               color_on_active='yellow')
-        toggle_button = QtWidgets.QPushButton(toggle_icon, 'Toggle')
+        toggle_icon = qta.icon(
+            "fa5s.home",
+            selected="fa5s.balance-scale",
+            color_off="black",
+            color_off_active="blue",
+            color_on="orange",
+            color_on_active="yellow",
+        )
+        toggle_button = QtWidgets.QPushButton(toggle_icon, "Toggle")
         toggle_button.setCheckable(True)
 
         iconwidget = qta.IconWidget()
-        spin_icon = qta.icon('mdi.loading', color='red',
-                             animation=qta.Spin(iconwidget))
+        spin_icon = qta.icon("mdi.loading", color="red", animation=qta.Spin(iconwidget))
         iconwidget.setIcon(spin_icon)
         iconwidget.setIconSize(QtCore.QSize(32, 32))
         iconwidgetholder = QtWidgets.QWidget()
         lo = QtWidgets.QHBoxLayout()
         lo.addWidget(iconwidget)
-        lo.addWidget(QtWidgets.QLabel('IconWidget'))
+        lo.addWidget(QtWidgets.QLabel("IconWidget"))
         iconwidgetholder.setLayout(lo)
-        iconwidget2 = qta.IconWidget('mdi.web', color='blue', size=QtCore.QSize(16, 16))
+        iconwidget2 = qta.IconWidget("mdi.web", color="blue", size=QtCore.QSize(16, 16))
 
         # Icon drawn with the `image` option
-        drawn_image_icon = qta.icon('ri.truck-fill',
-                                    options=[{'draw': 'image'}])
-        drawn_image_button = QtWidgets.QPushButton(drawn_image_icon,
-                                                   'Icon drawn as an image')
+        drawn_image_icon = qta.icon("ri.truck-fill", options=[{"draw": "image"}])
+        drawn_image_button = QtWidgets.QPushButton(
+            drawn_image_icon, "Icon drawn as an image"
+        )
 
         # Stack icons
-        camera_ban = qta.icon('fa5s.camera', 'fa5s.ban',
-                              options=[{'scale_factor': 0.5,
-                                        'active': 'fa5s.balance-scale'},
-                                       {'color': 'red', 'opacity': 0.7}])
-        stack_button = QtWidgets.QPushButton(camera_ban, 'Stack')
+        camera_ban = qta.icon(
+            "fa5s.camera",
+            "fa5s.ban",
+            options=[
+                {"scale_factor": 0.5, "active": "fa5s.balance-scale"},
+                {"color": "red", "opacity": 0.7},
+            ],
+        )
+        stack_button = QtWidgets.QPushButton(camera_ban, "Stack")
         stack_button.setIconSize(QtCore.QSize(32, 32))
 
         # Stack and offset icons
-        saveall = qta.icon('fa5.save', 'fa5.save',
-                           options=[{'scale_factor': 0.8,
-                                     'offset': (0.2, 0.2),
-                                     'color': 'gray'},
-                                    {'scale_factor': 0.8}])
-        saveall_button = QtWidgets.QPushButton(saveall, 'Stack, offset')
+        saveall = qta.icon(
+            "fa5.save",
+            "fa5.save",
+            options=[
+                {"scale_factor": 0.8, "offset": (0.2, 0.2), "color": "gray"},
+                {"scale_factor": 0.8},
+            ],
+        )
+        saveall_button = QtWidgets.QPushButton(saveall, "Stack, offset")
 
         # Spin icons
-        spin_button = QtWidgets.QPushButton(' Spinning icon')
+        spin_button = QtWidgets.QPushButton(" Spinning icon")
         animation1 = qta.Spin(spin_button)
-        spin_icon = qta.icon('fa5s.spinner', color='red', animation=animation1)
+        spin_icon = qta.icon("fa5s.spinner", color="red", animation=animation1)
         spin_button.setIcon(spin_icon)
 
         timer1 = QtCore.QTimer()
         timer1.singleShot(3000, animation1.stop)
 
         # Pulse icons
-        pulse_button = QtWidgets.QPushButton(' Pulsing icon')
+        pulse_button = QtWidgets.QPushButton(" Pulsing icon")
         animation2 = qta.Pulse(pulse_button, autostart=False)
-        pulse_icon = qta.icon('fa5s.spinner', color='green',
-                              animation=animation2)
+        pulse_icon = qta.icon("fa5s.spinner", color="green", animation=animation2)
         pulse_button.setIcon(pulse_icon)
 
         timer2 = QtCore.QTimer()
@@ -142,18 +151,18 @@ class AwesomeExample(QtWidgets.QDialog):
         timer3.singleShot(6000, animation2.stop)
 
         # Stacked spin icons
-        stack_spin_button = QtWidgets.QPushButton('Stack spin')
-        options = [{'scale_factor': 0.4,
-                    'animation': qta.Spin(stack_spin_button)},
-                   {'color': 'blue'}]
-        stack_spin_icon = qta.icon('ei.asl', 'fa5.square',
-                                   options=options)
+        stack_spin_button = QtWidgets.QPushButton("Stack spin")
+        options = [
+            {"scale_factor": 0.4, "animation": qta.Spin(stack_spin_button)},
+            {"color": "blue"},
+        ]
+        stack_spin_icon = qta.icon("ei.asl", "fa5.square", options=options)
         stack_spin_button.setIcon(stack_spin_icon)
         stack_spin_button.setIconSize(QtCore.QSize(32, 32))
 
         # Render a label with this font
-        label = QtWidgets.QLabel(chr(0xf19c) + ' ' + 'Label')
-        label.setFont(qta.font('fa', 16))
+        label = QtWidgets.QLabel(chr(0xF19C) + " " + "Label")
+        label.setFont(qta.font("fa", 16))
 
         # Layout
         grid = QtWidgets.QGridLayout()
@@ -176,7 +185,7 @@ class AwesomeExample(QtWidgets.QDialog):
             hflip_button,
             vflip_button,
             toggle_button,
-            drawn_image_button
+            drawn_image_button,
         ]
         animated_widgets = [
             spin_button,
@@ -185,11 +194,7 @@ class AwesomeExample(QtWidgets.QDialog):
             saveall_button,
             stack_spin_button,
         ]
-        other_widgets = [
-            label,
-            iconwidgetholder,
-            iconwidget2
-        ]
+        other_widgets = [label, iconwidgetholder, iconwidget2]
 
         for idx, w in enumerate(fonts_widgets):
             grid.addWidget(w, idx, 0)
@@ -203,10 +208,10 @@ class AwesomeExample(QtWidgets.QDialog):
         for idx, w in enumerate(other_widgets):
             grid.addWidget(w, idx + len(styled_widgets) + len(animated_widgets), 1)
 
-        title = 'Awesome'
-        args = ' '.join(sys.argv[1:]).strip()
+        title = "Awesome"
+        args = " ".join(sys.argv[1:]).strip()
         if args:
-            title += ' (' + args + ')'
+            title += " (" + args + ")"
 
         self.setLayout(grid)
         self.setWindowTitle(title)
@@ -215,13 +220,12 @@ class AwesomeExample(QtWidgets.QDialog):
 
 
 def main():
-
     global_defaults = {}
     for arg in sys.argv[1:]:
         try:
-            key, val = arg.split('=', maxsplit=1)
+            key, val = arg.split("=", maxsplit=1)
             global_defaults[key] = val
-        except:
+        except Exception:
             pass
     if global_defaults:
         qta.set_global_defaults(**global_defaults)
@@ -229,7 +233,7 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
 
     # Enable High DPI display with PyQt5
-    if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+    if hasattr(QtCore.Qt, "AA_UseHighDpiPixmaps"):
         app.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
 
     # Timer needed to close the example application
@@ -239,5 +243,5 @@ def main():
     sys.exit(app.exec_())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
