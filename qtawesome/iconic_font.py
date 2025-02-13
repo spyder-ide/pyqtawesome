@@ -676,7 +676,7 @@ class IconicFont(QObject):
         if not local_appdata_dir and not system_wide:
             return fonts_directory
 
-        # Construct path to fonts from WINDIR and LOCALAPPDATA
+        # Construct path to fonts from WINDIR or LOCALAPPDATA
         system_fonts_dir = os.path.join(windows_dir, "Fonts")
 
         user_fonts_dir = os.path.join(
@@ -684,20 +684,23 @@ class IconicFont(QObject):
         )
         os.makedirs(user_fonts_dir, exist_ok=True)
 
-        fonts_dir = system_fonts_dir if system_wide else user_fonts_dir
+        install_fonts_dir = system_fonts_dir if system_wide else user_fonts_dir
 
-        # Setup bundled fonts on the LOCALAPPDATA fonts directory
+        # Setup bundled fonts on the WINDIR or LOCALAPPDATA fonts directory
         for root, __, files in os.walk(fonts_directory):
             for filename in files:
                 src_path = os.path.join(root, filename)
                 dst_filename = filename
-                dst_path = os.path.join(fonts_dir, dst_filename)
+                dst_path = os.path.join(install_fonts_dir, dst_filename)
 
                 # Check if font already exists and proceed with copy font
                 # process if needed or skip it
                 if os.path.isfile(dst_path):
                     continue
-                shutil.copy(src_path, dst_path)
+                try:
+                    shutil.copy(src_path, dst_path)
+                except PermissionError:
+                    print(f"Needs permissions to install {filename}")
 
                 # Further process the font file (`.ttf`)
                 if os.path.splitext(filename)[-1] == ".ttf":
@@ -751,4 +754,4 @@ class IconicFont(QObject):
                         # See spyder-ide/qtawesome#214
                         return fonts_directory
 
-        return fonts_dir
+        return install_fonts_dir
