@@ -9,6 +9,7 @@ Font-Awesome and other iconic fonts for PyQt / PySide applications.
 .. autosummary::
    :toctree: _generate
 
+   install_bundled_fonts_system_wide
    icon
    load_font
    charmap
@@ -79,6 +80,10 @@ _MD5_HASHES = {
     "remixicon-2.5.0.ttf": "888e61f04316f10bddfff7bee10c6dd0",
     "codicon-0.0.35.ttf": "8478f5b3df2158f7e4864473e34efda1",
 }
+
+
+def install_bundled_fonts_system_wide():
+    _instance().install_fonts_system_wide()
 
 
 def has_valid_font_ids(inst):

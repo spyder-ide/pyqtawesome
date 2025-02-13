@@ -616,6 +616,14 @@ class IconicFont(QObject):
         """
         self.painters[name] = painter
 
+    def install_fonts_system_wide(self):
+        fonts_directory = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), "fonts"
+        )
+        if os.name == "nt":
+            fonts_directory = self._install_fonts(fonts_directory, system_wide=True)
+            return fonts_directory
+
     def _custom_icon(self, name, **kwargs):
         """Return the custom icon corresponding to the given name."""
         options = dict(_default_options, **kwargs)
