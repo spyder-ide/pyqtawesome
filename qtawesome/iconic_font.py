@@ -52,7 +52,7 @@ SYSTEM_FONTS = False
 # Needed imports and constants to install bundled fonts on Windows
 # Based on https://stackoverflow.com/a/41841088/15954282
 if os.name == "nt":
-    from ctypes import wintypes
+    from ctypes import wintypes, windll
     import winreg
 
     user32 = ctypes.WinDLL("user32", use_last_error=True)
@@ -617,12 +617,22 @@ class IconicFont(QObject):
         self.painters[name] = painter
 
     def install_fonts_system_wide(self):
-        fonts_directory = os.path.join(
-            os.path.dirname(os.path.realpath(__file__)), "fonts"
-        )
+        """Install bundled fonts system wide on Windows."""
         if os.name == "nt":
-            fonts_directory = self._install_fonts(fonts_directory, system_wide=True)
-            return fonts_directory
+            if windll.shell32.IsUserAnAdmin():
+                # Execute logic to install bundled fonts system wide
+                fonts_directory = os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), "fonts"
+                )
+                self._install_fonts(fonts_directory, system_wide=True)
+            else:
+                # Call `qta-fonts` using `runas` to prompt user for admin elevation
+                warnings.warn(
+                    "Need for admin privileges to install bundled fonts. "
+                    "A prompt to get admin privileges and relaunch the command "
+                    "will be shown..."
+                )
+                windll.shell32.ShellExecuteW(None, "runas", "qta-fonts", None, None, 0)
 
     def _custom_icon(self, name, **kwargs):
         """Return the custom icon corresponding to the given name."""
@@ -651,9 +661,7 @@ class IconicFont(QObject):
         fonts_directory = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "fonts"
         )
-        if os.name == "nt":
-            fonts_directory = self._install_fonts(fonts_directory)
-        return fonts_directory
+        return self._install_fonts(fonts_directory)
 
     def _install_fonts(self, fonts_directory, system_wide=False):
         """
@@ -661,12 +669,15 @@ class IconicFont(QObject):
 
         By default copy the fonts to the user Fonts folder. Passing the
         `system_wide` kwarg as `True` will instead copy them to the system
-        Fonts directory (operation can fail in case the required admin
+        Fonts directory (operation will fail in case the required admin
         privileges are not available).
 
         Based on https://stackoverflow.com/a/41841088/15954282 and
         https://superuser.com/a/1663482
         """
+        if os.name != "nt":
+            return fonts_directory
+
         # Try to get WINDIR and LOCALAPPDATA path
         windows_dir = os.environ.get("WINDIR", None)
         if not windows_dir and system_wide:
@@ -697,10 +708,8 @@ class IconicFont(QObject):
                 # process if needed or skip it
                 if os.path.isfile(dst_path):
                     continue
-                try:
-                    shutil.copy(src_path, dst_path)
-                except PermissionError:
-                    print(f"Needs permissions to install {filename}")
+
+                shutil.copy(src_path, dst_path)
 
                 # Further process the font file (`.ttf`)
                 if os.path.splitext(filename)[-1] == ".ttf":
