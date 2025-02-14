@@ -86,7 +86,9 @@ def get_fonts_info():
     """
     Return tuple with information about the bundled fonts being used.
 
-    Tuple contains fonts directory path and a list with the fonts filenames.
+    Notes
+    -----
+    The tuple contains the fonts directory path and a list of font filenames.
     """
     fonts_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fonts")
     return (
