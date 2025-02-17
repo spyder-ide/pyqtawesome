@@ -88,5 +88,10 @@ def test_get_fonts_info():
     assert set(fonts_list) == set(fonts_expected)
 
 
+def test_font_load_from_system_fonts(monkeypatch):
+    monkeypatch.setenv("QTA_FORCE_SYSTEM_FONTS_LOAD", "true")
+    qta._instance()
+
+
 if __name__ == "__main__":
     pytest.main()
