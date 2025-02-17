@@ -411,10 +411,12 @@ class IconicFont(QObject):
                 id_ = QFontDatabase.addApplicationFontFromData(data)
             font_data.close()
 
-            if id_ == -1 and os.name == "nt":
+            if (
+                id_ == -1 or os.environ.get("QTA_FORCE_SYSTEM_FONTS_LOAD")
+            ) and os.name == "nt":
                 # Try to load font from system Fonts directory
-                windows_dir = os.environ.get("WINDIR")
-                if windows_dir:
+                windows_dir = os.environ.get("WINDIR", r"C:\Windows")
+                if os.path.isdir(windows_dir):
                     from_system_ttf = os.path.join(windows_dir, "Fonts", ttf_filename)
                     id_ = QFontDatabase.addApplicationFont(from_system_ttf)
 
