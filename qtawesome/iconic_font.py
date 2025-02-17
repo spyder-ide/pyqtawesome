@@ -410,7 +410,7 @@ class IconicFont(QObject):
                 data = font_data.read()
                 id_ = (
                     -1
-                    if os.environ.get("QTA_FORCE_SYSTEM_FONTS_LOAD")
+                    if os.environ.get("QTA_FORCE_SYSTEM_FONTS_LOAD") and os.name == "nt"
                     else QFontDatabase.addApplicationFontFromData(data)
                 )
             font_data.close()
