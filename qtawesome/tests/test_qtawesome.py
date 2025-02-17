@@ -89,8 +89,10 @@ def test_get_fonts_info():
 
 
 def test_font_load_from_system_fonts(monkeypatch):
-    monkeypatch.setenv("QTA_FORCE_SYSTEM_FONTS_LOAD", "true")
-    qta._instance()
+    with monkeypatch.context() as m:
+        qta._resource["iconic"] = None
+        m.setenv("QTA_FORCE_SYSTEM_FONTS_LOAD", "true")
+        qta._instance()
 
 
 if __name__ == "__main__":
