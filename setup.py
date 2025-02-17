@@ -53,7 +53,7 @@ setup(
     entry_points={
         "console_scripts": [
             "qta-browser=qtawesome.icon_browser:run",
-            "qta-fonts=qtawesome:install_bundled_fonts_system_wide",
+            "qta-install-fonts-system-wide=qtawesome:install_bundled_fonts_system_wide",
         ],
     },
 )

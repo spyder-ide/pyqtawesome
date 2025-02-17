@@ -626,13 +626,15 @@ class IconicFont(QObject):
                 )
                 self._install_fonts(fonts_directory, system_wide=True)
             else:
-                # Call `qta-fonts` using `runas` to prompt user for admin elevation
+                # Call `qta-install-fonts-system-wide` using `runas` to prompt user for admin elevation
                 warnings.warn(
                     "Need for admin privileges to install bundled fonts. "
                     "A prompt to get admin privileges and relaunch the command "
                     "will be shown..."
                 )
-                windll.shell32.ShellExecuteW(None, "runas", "qta-fonts", None, None, 0)
+                windll.shell32.ShellExecuteW(
+                    None, "runas", "qta-install-fonts-system-wide", None, None, 0
+                )
 
     def _custom_icon(self, name, **kwargs):
         """Return the custom icon corresponding to the given name."""
