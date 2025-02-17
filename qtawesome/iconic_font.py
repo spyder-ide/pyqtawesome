@@ -628,9 +628,9 @@ class IconicFont(QObject):
             else:
                 # Call `qta-install-fonts-system-wide` using `runas` to prompt user for admin elevation
                 warnings.warn(
-                    "Need for admin privileges to install bundled fonts. "
-                    "A prompt to get admin privileges and relaunch the command "
-                    "will be shown..."
+                    "Admin privileges are needed to install the bundled fonts. "
+                    "A prompt to get them will be shown and after that this "
+                    "command will be relaunched..."
                 )
                 windll.shell32.ShellExecuteW(
                     None, "runas", "qta-install-fonts-system-wide", None, None, 0
