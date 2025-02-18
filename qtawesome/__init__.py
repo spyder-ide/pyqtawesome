@@ -97,7 +97,7 @@ def get_fonts_info():
         [entry for entry in os.listdir(fonts_directory) if entry.endswith(".ttf")],
     )
 
-  
+
 def install_bundled_fonts_system_wide():
     _instance().install_fonts_system_wide()
 
