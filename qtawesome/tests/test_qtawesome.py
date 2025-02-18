@@ -49,9 +49,9 @@ def test_unique_font_family_name(qtbot):
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Only meant for Windows")
-def test_bundled_font_installation():
+def test_bundled_font_user_installation():
     """
-    Test that the bundled fonts are being installed on Windows.
+    Test that the bundled fonts are being installed on Windows for current user.
 
     See spyder-ide/qtawesome#167 and spyder-ide/spyder#18642
     """
@@ -63,6 +63,38 @@ def test_bundled_font_installation():
     fonts_command = [
         "powershell.exe",
         r'Get-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"',
+    ]
+    fonts_result = subprocess.run(
+        fonts_command, capture_output=True, check=True, text=True
+    ).stdout
+    for font_filename in fonts_expected:
+        assert font_filename in fonts_result
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Only meant for Windows")
+def test_bundled_font_system_installation():
+    """
+    Test that the bundled fonts can be installed on Windows for all users.
+
+    See spyder-ide/qtawesome#167 and spyder-ide/spyder#18642
+    """
+    qta.install_bundled_fonts_system_wide()
+    fonts_expected = [
+        "FontAwesome",
+        "codicon",
+        "elusiveicons",
+        "Font Awesome 5 Brands Regular",
+        "Font Awesome 5 Free Regular",
+        "Font Awesome 5 Free Solid",
+        "Material Design Icons 5.9.55 Regular",
+        "Material Design Icons",
+        "Phosphor",
+        "remixicon",
+    ]
+    assert len(fonts_expected) == len(qta._BUNDLED_FONTS)
+    fonts_command = [
+        "powershell.exe",
+        r'Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"',
     ]
     fonts_result = subprocess.run(
         fonts_command, capture_output=True, check=True, text=True

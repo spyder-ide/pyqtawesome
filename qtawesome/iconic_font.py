@@ -52,7 +52,7 @@ SYSTEM_FONTS = False
 # Needed imports and constants to install bundled fonts on Windows
 # Based on https://stackoverflow.com/a/41841088/15954282
 if os.name == "nt":
-    from ctypes import wintypes
+    from ctypes import wintypes, windll
     import winreg
 
     user32 = ctypes.WinDLL("user32", use_last_error=True)
@@ -616,6 +616,26 @@ class IconicFont(QObject):
         """
         self.painters[name] = painter
 
+    def install_fonts_system_wide(self):
+        """Install bundled fonts system wide on Windows."""
+        if os.name == "nt":
+            if windll.shell32.IsUserAnAdmin():
+                # Execute logic to install bundled fonts system wide
+                fonts_directory = os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), "fonts"
+                )
+                self._install_fonts(fonts_directory, system_wide=True)
+            else:
+                # Call `qta-install-fonts-all-users` using `runas` to prompt user for admin elevation
+                warnings.warn(
+                    "Admin privileges are needed to install the bundled fonts. "
+                    "A prompt to get them will be shown and after that this "
+                    "command will be relaunched..."
+                )
+                windll.shell32.ShellExecuteW(
+                    None, "runas", "qta-install-fonts-all-users", None, None, 0
+                )
+
     def _custom_icon(self, name, **kwargs):
         """Return the custom icon corresponding to the given name."""
         options = dict(_default_options, **kwargs)
@@ -643,38 +663,54 @@ class IconicFont(QObject):
         fonts_directory = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "fonts"
         )
-        if os.name == "nt":
-            fonts_directory = self._install_fonts(fonts_directory)
-        return fonts_directory
+        return self._install_fonts(fonts_directory)
 
-    def _install_fonts(self, fonts_directory):
+    def _install_fonts(self, fonts_directory, system_wide=False):
         """
-        Copy the fonts to the user Fonts folder.
+        Install bundled fonts on Windows.
 
-        Based on https://stackoverflow.com/a/41841088/15954282
+        By default copy the fonts to the user Fonts folder. Passing the
+        `system_wide` kwarg as `True` will instead copy them to the system
+        Fonts directory (operation will fail in case the required admin
+        privileges are not available).
+
+        Based on https://stackoverflow.com/a/41841088/15954282 and
+        https://superuser.com/a/1663482
         """
-        # Try to get LOCALAPPDATA path
-        local_appdata_dir = os.environ.get("LOCALAPPDATA", None)
-        if not local_appdata_dir:
+        if os.name != "nt":
             return fonts_directory
 
-        # Construct path to fonts from LOCALAPPDATA
+        # Try to get WINDIR and LOCALAPPDATA path
+        windows_dir = os.environ.get("WINDIR", None)
+        if not windows_dir and system_wide:
+            return fonts_directory
+
+        local_appdata_dir = os.environ.get("LOCALAPPDATA", None)
+        if not local_appdata_dir and not system_wide:
+            return fonts_directory
+
+        # Construct path to fonts from WINDIR or LOCALAPPDATA
+        system_fonts_dir = os.path.join(windows_dir, "Fonts")
+
         user_fonts_dir = os.path.join(
             local_appdata_dir, "Microsoft", "Windows", "Fonts"
         )
         os.makedirs(user_fonts_dir, exist_ok=True)
 
-        # Setup bundled fonts on the LOCALAPPDATA fonts directory
+        install_fonts_dir = system_fonts_dir if system_wide else user_fonts_dir
+
+        # Setup bundled fonts on the WINDIR or LOCALAPPDATA fonts directory
         for root, __, files in os.walk(fonts_directory):
             for filename in files:
                 src_path = os.path.join(root, filename)
                 dst_filename = filename
-                dst_path = os.path.join(user_fonts_dir, dst_filename)
+                dst_path = os.path.join(install_fonts_dir, dst_filename)
 
                 # Check if font already exists and proceed with copy font
                 # process if needed or skip it
                 if os.path.isfile(dst_path):
                     continue
+
                 shutil.copy(src_path, dst_path)
 
                 # Further process the font file (`.ttf`)
@@ -714,7 +750,9 @@ class IconicFont(QObject):
                         fontname += " (TrueType)"
                     try:
                         with winreg.OpenKey(
-                            winreg.HKEY_CURRENT_USER,
+                            winreg.HKEY_LOCAL_MACHINE
+                            if system_wide
+                            else winreg.HKEY_CURRENT_USER,
                             FONTS_REG_PATH,
                             0,
                             winreg.KEY_SET_VALUE,
@@ -727,4 +765,4 @@ class IconicFont(QObject):
                         # See spyder-ide/qtawesome#214
                         return fonts_directory
 
-        return user_fonts_dir
+        return install_fonts_dir
