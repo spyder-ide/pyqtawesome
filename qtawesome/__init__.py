@@ -10,6 +10,7 @@ Font-Awesome and other iconic fonts for PyQt / PySide applications.
    :toctree: _generate
 
    get_fonts_info
+   install_bundled_fonts_system_wide
    icon
    load_font
    charmap
@@ -95,6 +96,10 @@ def get_fonts_info():
         fonts_directory,
         [entry for entry in os.listdir(fonts_directory) if entry.endswith(".ttf")],
     )
+
+  
+def install_bundled_fonts_system_wide():
+    _instance().install_fonts_system_wide()
 
 
 def has_valid_font_ids(inst):

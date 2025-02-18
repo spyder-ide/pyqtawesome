@@ -51,6 +51,9 @@ setup(
         "update_msc": setupbase.UpdateCodiconCommand,
     },
     entry_points={
-        "console_scripts": ["qta-browser=qtawesome.icon_browser:run"],
+        "console_scripts": [
+            "qta-browser=qtawesome.icon_browser:run",
+            "qta-install-fonts-all-users=qtawesome:install_bundled_fonts_system_wide",
+        ],
     },
 )
