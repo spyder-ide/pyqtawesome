@@ -35,7 +35,6 @@ from .styles import dark as dark, light as light
 _resource = {"iconic": None}
 
 _BUNDLED_FONTS = (
-    ("fa", "fontawesome4-webfont-4.7.ttf", "fontawesome4-webfont-charmap-4.7.json"),
     (
         "fa5",
         "fontawesome5-regular-webfont-5.15.4.ttf",
@@ -70,7 +69,6 @@ _BUNDLED_FONTS = (
 
 # MD5 Hashes for font files bundled with qtawesome:
 _MD5_HASHES = {
-    "fontawesome4-webfont-4.7.ttf": "b06871f281fee6b241d60582ae9369b9",
     "fontawesome5-regular-webfont-5.15.4.ttf": "dc47e4089f5bcb25f241bdeb2de0fb58",
     "fontawesome5-solid-webfont-5.15.4.ttf": "5de19800fc9ae73438c2e5c61d041b48",
     "fontawesome5-brands-webfont-5.15.4.ttf": "513aa607d398efaccc559916c3431403",
