@@ -18,7 +18,7 @@ import qtawesome as qta
 
 def test_segfault_import():
     output_number = subprocess.call(
-        sys.executable + ' -c "import qtawesome ' '; qtawesome.icon()"', shell=True
+        sys.executable + ' -c "import qtawesome ; qtawesome.icon()"', shell=True
     )
     assert output_number == 0
 

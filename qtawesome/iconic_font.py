@@ -397,7 +397,7 @@ class IconicFont(QObject):
                         pass
                     else:
                         raise FontError(
-                            "Failed to load character " "{0}:{1}".format(key, obj[key])
+                            "Failed to load character {0}:{1}".format(key, obj[key])
                         )
             return result
 
@@ -480,7 +480,7 @@ class IconicFont(QObject):
                 )
             else:
                 warnings.warn(
-                    "You need to have a running " "QApplication to use QtAwesome!"
+                    "You need to have a running QApplication to use QtAwesome!"
                 )
                 return QIcon()
         return self.icon_cache[cache_key]
