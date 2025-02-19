@@ -162,7 +162,7 @@ class AwesomeExample(QtWidgets.QDialog):
 
         # Render a label with this font
         label = QtWidgets.QLabel(chr(0xF19C) + " " + "Label")
-        label.setFont(qta.font("fa", 16))
+        label.setFont(qta.font("fa5s", 16))
 
         # Layout
         grid = QtWidgets.QGridLayout()
