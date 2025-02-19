@@ -436,15 +436,6 @@ class IconicFont(QObject):
         """Return a QIcon object corresponding to the provided icon name."""
         cache_key = "{}{}".format(names, kwargs)
 
-        if names and "fa." in names[0]:
-            warnings.warn(
-                "The FontAwesome 4.7 ('fa' prefix) icon set will be "
-                "removed in a future release in favor of FontAwesome 6. "
-                "We recommend you to move to FontAwesome 5 ('fa5*' prefix) "
-                "to prevent any issues in the future",
-                DeprecationWarning,
-            )
-
         if cache_key not in self.icon_cache:
             options_list = kwargs.pop("options", [{}] * len(names))
             general_options = kwargs
