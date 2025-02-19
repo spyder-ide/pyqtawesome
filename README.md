@@ -12,6 +12,8 @@
 [![Github MacOS build status](https://github.com/spyder-ide/qtawesome/workflows/Macos%20tests/badge.svg)](https://github.com/spyder-ide/qtawesome/actions)
 [![Documentation Status](https://readthedocs.org/projects/qtawesome/badge/?version=latest)](https://qtawesome.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/spyder-ide/qtawesome/branch/master/graph/badge.svg?token=Cylan0teq1)](https://codecov.io/gh/spyder-ide/qtawesome)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/spyder-ide/qtawesome/badge)](https://scorecard.dev/viewer/?uri=github.com/spyder-ide/qtawesome)
+
 
 *Copyright © 2015- Spyder Project Contributors*
 
