@@ -99,8 +99,8 @@ def test_bundled_font_system_installation():
 
     Notes
     -----
-    * When running this test is possible that a prompt for privileges
-      appears(UAC prompt).
+    * When running this test, it's possible that a prompt for privileges
+      may appear (UAC prompt).
     """
     qta.install_bundled_fonts_system_wide()
     fonts_expected = [
@@ -130,8 +130,8 @@ def test_font_load_from_system_fonts(monkeypatch):
     -----
     * This test ensures that the logic to load fonts from the system fonts
       only affects Windows even when it is being forced.
-    * When running this test is possible that a prompt for privileges
-      appears (UAC prompt).
+    * When running this test, it's possible that a prompt for privileges may
+      appear (UAC prompt).
     """
     qta.install_bundled_fonts_system_wide()
     with monkeypatch.context() as m:
