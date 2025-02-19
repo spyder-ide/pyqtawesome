@@ -97,9 +97,10 @@ def test_bundled_font_system_installation():
 
     See spyder-ide/qtawesome#244
 
-    Notes:
-        * When running this test is possible that a prompt for privileges
-        appears(UAC prompt).
+    Notes
+    -----
+    * When running this test is possible that a prompt for privileges
+      appears(UAC prompt).
     """
     qta.install_bundled_fonts_system_wide()
     fonts_expected = [
@@ -122,13 +123,15 @@ def test_bundled_font_system_installation():
 
 def test_font_load_from_system_fonts(monkeypatch):
     """
-    Test that the bundled fonts can be accessed from the system fonts on Windows.
+    Test that the bundled fonts can be accessed from the system fonts folder on
+    Windows.
 
-    Notes:
-        * This test ensures that the logic to load fonts from the system fonts
-        only affects Windows even when it is being forced.
-        * When running this test is possible that a prompt for privileges
-        appears(UAC prompt).
+    Notes
+    -----
+    * This test ensures that the logic to load fonts from the system fonts
+      only affects Windows even when it is being forced.
+    * When running this test is possible that a prompt for privileges
+      appears (UAC prompt).
     """
     qta.install_bundled_fonts_system_wide()
     with monkeypatch.context() as m:
