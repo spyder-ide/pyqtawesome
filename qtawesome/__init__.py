@@ -9,6 +9,7 @@ Font-Awesome and other iconic fonts for PyQt / PySide applications.
 .. autosummary::
    :toctree: _generate
 
+   get_fonts_info
    install_bundled_fonts_system_wide
    icon
    load_font
@@ -78,6 +79,21 @@ _MD5_HASHES = {
     "remixicon-2.5.0.ttf": "888e61f04316f10bddfff7bee10c6dd0",
     "codicon-0.0.35.ttf": "8478f5b3df2158f7e4864473e34efda1",
 }
+
+
+def get_fonts_info():
+    """
+    Return tuple with information about the bundled fonts being used.
+
+    Notes
+    -----
+    The tuple contains the fonts directory path and a list of font filenames.
+    """
+    fonts_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fonts")
+    return (
+        fonts_directory,
+        [entry for entry in os.listdir(fonts_directory) if entry.endswith(".ttf")],
+    )
 
 
 def install_bundled_fonts_system_wide():
