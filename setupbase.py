@@ -261,8 +261,8 @@ class UpdateCodiconCommand(setuptools.Command):
         HERE, "qtawesome", "fonts", "codicon-charmap-{version}.json"
     )
     TTF_PATH = os.path.join(HERE, "qtawesome", "fonts", "codicon-{version}.ttf")
-    DOWNLOAD_URL_TTF = "https://raw.githubusercontent.com/microsoft/vscode-codicons/{version}/dist/codicon.ttf"
-    DOWNLOAD_URL_CSS = "https://raw.githubusercontent.com/microsoft/vscode-codicons/{version}/dist/codicon.css"
+    DOWNLOAD_URL_TTF = "https://github.com/microsoft/vscode-codicons/releases/download/{version}/codicon.ttf"
+    DOWNLOAD_URL_MAPPING = "https://raw.githubusercontent.com/microsoft/vscode-codicons/refs/tags/{version}/src/template/mapping.json"
     DOWNLOAD_URL_JSON = "https://raw.githubusercontent.com/microsoft/vscode-codicons/{version}/package.json"
 
     def initialize_options(self):
@@ -294,24 +294,24 @@ class UpdateCodiconCommand(setuptools.Command):
         )
         self.__print("Will download codicons version: %s" % package_version)
 
-        # Download .css:
-        donwload_url_css = self.DOWNLOAD_URL_CSS.format(version=self.msc_version)
-        req = urlopen(donwload_url_css)
+        # Download mapping.json:
+        donwload_url_mapping = self.DOWNLOAD_URL_MAPPING.format(
+            version=self.msc_version
+        )
+        req = urlopen(donwload_url_mapping)
         if req.status != 200:
-            raise Exception("Failed to download CSS Charmap")
+            raise Exception("Failed to download JSON mapping")
 
-        rawcss = req.read().decode()
+        data = json.loads(req.read().decode())
         req.close()
 
-        # Interpret the codicon.css file:
+        # Interpret the mapping.json file:
         charmap = {}
-        pattern = '^\.codicon-(.+):before {\s*content: "(.+)"\s*}$'
-        data = re.findall(pattern, rawcss, re.MULTILINE)
-        for name, key in data:
-            key = key.replace("\\", "0x")
+        for name, key in data.items():
+            key = hex(key)
             name = name.lower()
             charmap[name] = key
-        self.__print("Identified %s icons in the CSS." % len(charmap))
+        self.__print("Identified %s icons in the JSON." % len(charmap))
 
         # Dump a .json charmap file the way we like it:
         charmap_path = self.CHARMAP_PATH.format(version=package_version)
@@ -334,8 +334,8 @@ class UpdateCodiconCommand(setuptools.Command):
         self.__print("Patching new MD5 hashes in: %s" % INIT_PY_PATH)
         with open(INIT_PY_PATH, "r") as init_file:
             contents = init_file.read()
-        regex = r"('codicon-%s.ttf':\s+)'(\w+)'" % self.msc_version
-        subst = r"\g<1>'" + md5 + "'"
+        regex = r'("codicon-%s.ttf":\s+)"(\w+)"' % self.msc_version
+        subst = r'\g<1>"' + md5 + '"'
         contents = re.sub(regex, subst, contents, 1)
         self.__print("Dumping updated file: %s" % INIT_PY_PATH)
         with open(INIT_PY_PATH, "w") as init_file:
