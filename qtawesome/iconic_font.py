@@ -725,7 +725,27 @@ class IconicFont(QObject):
                             # Possible permission error when trying to remove
                             # a font which potentially is already in use
                             # See spyder-ide/qtawesome#236
-                            continue
+                            pass
+                        # Regardless of the font file being actually removed
+                        # since the load failed we need to return here where
+                        # the font file is originally located. With that a
+                        # `FontError` can be eventually raised with useful
+                        # information if necessary (i.e not being able to load
+                        # bundled fonts pointing that the fonts are located on
+                        # the QtAwesome `fonts` directory and manual
+                        # configuration is needed to allow them). Also, if we
+                        # don't detected the font being available from the
+                        # system fonts directory a warning with a more specific
+                        # suggestion (install the font manually) is shown.
+                        # See spyder-ide/qtawesome#264
+                        if not os.path.isfile(os.path.join(system_fonts_dir, filename)):
+                            warnings.warn(
+                                "Font at '{0}' could not be loaded. If possible, "
+                                "install it system wide to make it available. "
+                                "Font source file to be manually installed can "
+                                "be found at '{1}'".format(dst_path, src_path)
+                            )
+                        return fonts_directory
 
                     # Store the fontname/filename in the registry
                     fontname = os.path.splitext(filename)[0]
