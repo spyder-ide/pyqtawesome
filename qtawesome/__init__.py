@@ -50,6 +50,21 @@ _BUNDLED_FONTS = (
         "fontawesome5-brands-webfont-5.15.4.ttf",
         "fontawesome5-brands-webfont-charmap-5.15.4.json",
     ),
+    (
+        "fa6",
+        "fontawesome6-regular-webfont-6.7.2.ttf",
+        "fontawesome6-regular-webfont-charmap-6.7.2.json",
+    ),
+    (
+        "fa6s",
+        "fontawesome6-solid-webfont-6.7.2.ttf",
+        "fontawesome6-solid-webfont-charmap-6.7.2.json",
+    ),
+    (
+        "fa6b",
+        "fontawesome6-brands-webfont-6.7.2.ttf",
+        "fontawesome6-brands-webfont-charmap-6.7.2.json",
+    ),
     ("ei", "elusiveicons-webfont-2.0.ttf", "elusiveicons-webfont-charmap-2.0.json"),
     (
         "mdi",
@@ -72,6 +87,9 @@ _MD5_HASHES = {
     "fontawesome5-regular-webfont-5.15.4.ttf": "dc47e4089f5bcb25f241bdeb2de0fb58",
     "fontawesome5-solid-webfont-5.15.4.ttf": "5de19800fc9ae73438c2e5c61d041b48",
     "fontawesome5-brands-webfont-5.15.4.ttf": "513aa607d398efaccc559916c3431403",
+    "fontawesome6-regular-webfont-6.7.2.ttf": "2b9e6cb53822f6a9b42f15229a36811a",
+    "fontawesome6-solid-webfont-6.7.2.ttf": "07312c769a05b2c17133da1a09db4ccf",
+    "fontawesome6-brands-webfont-6.7.2.ttf": "15d54d142da2f2d6f2e90ed1d55121af",
     "elusiveicons-webfont-2.0.ttf": "207966b04c032d5b873fd595a211582e",
     "materialdesignicons5-webfont-5.9.55.ttf": "b7d40e7ef80c1d4af6d94902af66e524",
     "materialdesignicons6-webfont-6.9.96.ttf": "ecaabfbb23fdac4ddbaf897b97257a92",
@@ -165,10 +183,12 @@ def icon(*names, **kwargs):
     The ``prefix`` corresponds to the font to be used and ``name`` is the
     name of the icon.
 
-     - The prefix corresponding to Font-Awesome 4.x is 'fa'
-     - The prefix corresponding to Font-Awesome 5.x (regular) is 'fa5'
-     - The prefix corresponding to Font-Awesome 5.x (solid) is 'fa5s'
-     - The prefix corresponding to Font-Awesome 5.x (brands) is 'fa5b'
+     - The prefix corresponding to Font-Awesome 6.x (regular) is 'fa6'
+     - The prefix corresponding to Font-Awesome 6.x (solid) is 'fa6s'
+     - The prefix corresponding to Font-Awesome 6.x (brands) is 'fa6b'
+     - The prefix corresponding to Font-Awesome 5 (regular) is 'fa5'
+     - The prefix corresponding to Font-Awesome 5 (solid) is 'fa5s'
+     - The prefix corresponding to Font-Awesome 5 (brands) is 'fa5b'
      - The prefix corresponding to Elusive-Icons is 'ei'
      - The prefix corresponding to Material-Design-Icons 5.x is 'mdi'
      - The prefix corresponding to Material-Design-Icons 6.x is 'mdi6'

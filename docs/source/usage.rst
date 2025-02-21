@@ -10,6 +10,12 @@ The following prefixes are currently available to use:
 
 -  `FontAwesome`_:
 
+   - FA 6.7.2 features 2,060 free icons in different styles:
+
+      - ``fa6`` prefix has `163 icons in the "regular" style.`_
+      - ``fa6s`` prefix has `1402 icons in the "solid" style.`_
+      - ``fa6b`` prefix has `495 icons of various brands.`_
+
    -  FA 5.15.4 features 1,608 free icons in different styles:
 
       -  ``fa5`` prefix has `151 icons in the "regular" style.`_
@@ -31,9 +37,12 @@ The following prefixes are currently available to use:
 -  ``msc`` prefix holds Microsoft's `Codicons 0.0.35 with its 540 icons.`_
 
 .. _FontAwesome: https://fontawesome.com
-.. _151 icons in the "regular" style.: https://fontawesome.com/v5/search?o=r&m=free&s=regular
-.. _1001 icons in the "solid" style.: https://fontawesome.com/v5/search?o=r&m=free&s=solid
-.. _456 icons of various brands.: https://fontawesome.com/v5/search?o=r&m=free&f=brands
+.. _163 icons in the "regular" style.: https://fontawesome.com/v6/search?o=r&ic=free&s=regular
+.. _1402 icons in the "solid" style.: https://fontawesome.com/v6/search?o=r&ic=free&s=solid
+.. _495 icons of various brands.: https://fontawesome.com/v6/search?o=r&ic=free&ip=brands
+.. _151 icons in the "regular" style.: https://fontawesome.com/v5/search?o=r&ic=free&s=regular
+.. _1001 icons in the "solid" style.: https://fontawesome.com/v5/search?o=r&ic=free&s=solid
+.. _456 icons of various brands.: https://fontawesome.com/v5/search?ic=brands
 .. _Elusive Icons 2.0 with its 304 icons: http://elusiveicons.com/icons/
 .. _Material Design Icons: https://pictogrammers.com/library/mdi/
 .. _Material Design Icons 6.9.96 with its 6997 icons.: https://cdn.materialdesignicons.com/6.9.96/
@@ -53,15 +62,25 @@ Examples
 
 .. code:: python
 
-   # Get FontAwesome 5.x icons by name in various styles by name
+   # Get FontAwesome 6.x icons by name in various styles:
+   fa6_icon = qta.icon('fa6.flag')
+   fa6_button = QtWidgets.QPushButton(fa6_icon, 'Font Awesome 6! (regular)')
+
+   fa6s_icon = qta.icon('fa6s.flag')
+   fa6s_button = QtWidgets.QPushButton(fa6s_icon, 'Font Awesome 6! (solid)')
+
+   fa6b_icon = qta.icon('fa6b.github')
+   fa6b_button = QtWidgets.QPushButton(fa6b_icon, 'Font Awesome 6! (brands)')
+
+   # Get FontAwesome 5.x icons by name in various styles:
    fa5_icon = qta.icon('fa5.flag')
-   fa5_button = QtWidgets.QPushButton(fa5_icon, 'Font Awesome! (regular)')
+   fa5_button = QtWidgets.QPushButton(fa5_icon, 'Font Awesome 5! (regular)')
 
    fa5s_icon = qta.icon('fa5s.flag')
-   fa5s_button = QtWidgets.QPushButton(fa5s_icon, 'Font Awesome! (solid)')
+   fa5s_button = QtWidgets.QPushButton(fa5s_icon, 'Font Awesome 5! (solid)')
 
    fa5b_icon = qta.icon('fa5b.github')
-   fa5b_button = QtWidgets.QPushButton(fa5b_icon, 'Font Awesome! (brands)')
+   fa5b_button = QtWidgets.QPushButton(fa5b_icon, 'Font Awesome 5! (brands)')
 
    # Get Elusive icons by name
    asl_icon = qta.icon('ei.asl')

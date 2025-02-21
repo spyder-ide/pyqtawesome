@@ -13,20 +13,31 @@ import qtawesome as qta
 class AwesomeExample(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
+        self.setWindowIcon(qta.icon("fa5s.icons"))
 
         # Label for supported fonts
         supported_fonts_label = QtWidgets.QLabel("Supported fonts (prefix)")
         supported_fonts_label.setAlignment(QtCore.Qt.AlignCenter)
 
-        # Get FontAwesome 5.x icons by name in various styles by name
+        # Get FontAwesome 6.x icons by name in various styles:
+        fa6_icon = qta.icon("fa6.flag")
+        fa6_button = QtWidgets.QPushButton(fa6_icon, "Font Awesome 6! (regular)")
+
+        fa6s_icon = qta.icon("fa6s.flag")
+        fa6s_button = QtWidgets.QPushButton(fa6s_icon, "Font Awesome 6! (solid)")
+
+        fa6b_icon = qta.icon("fa6b.github")
+        fa6b_button = QtWidgets.QPushButton(fa6b_icon, "Font Awesome 6! (brands)")
+
+        # Get FontAwesome 5.x icons by name in various styles:
         fa5_icon = qta.icon("fa5.flag")
-        fa5_button = QtWidgets.QPushButton(fa5_icon, "Font Awesome regular (fa5)")
+        fa5_button = QtWidgets.QPushButton(fa5_icon, "Font Awesome 5! (regular)")
 
         fa5s_icon = qta.icon("fa5s.flag")
-        fa5s_button = QtWidgets.QPushButton(fa5s_icon, "Font Awesome solid (fa5s)")
+        fa5s_button = QtWidgets.QPushButton(fa5s_icon, "Font Awesome 5! (solid)")
 
         fa5b_icon = qta.icon("fa5b.github")
-        fa5b_button = QtWidgets.QPushButton(fa5b_icon, "Font Awesome brands (fa5b)")
+        fa5b_button = QtWidgets.QPushButton(fa5b_icon, "Font Awesome 5! (brands)")
 
         # Get Elusive icons by name
         asl_icon = qta.icon("ei.asl")
@@ -168,6 +179,9 @@ class AwesomeExample(QtWidgets.QDialog):
         grid = QtWidgets.QGridLayout()
         fonts_widgets = [
             supported_fonts_label,
+            fa6_button,
+            fa6s_button,
+            fa6b_button,
             fa5_button,
             fa5s_button,
             fa5b_button,

@@ -7,7 +7,7 @@ To update _FontAwesome_ icons, one must:
 - check what is the latest released version here: https://github.com/FortAwesome/Font-Awesome/releases/
 - update font version in \_\_init__.py
 - remove outdated files in the fonts dir
-- run: `python setup.py update_fa5 --fa-version X.X.X`
+- run: `python setup.py update_fa6 --fa-version X.X.X`
 - update FA version number, icon counts and URLs inside:
   - README.md
   - qtawesome/docs/source/usage.rst
