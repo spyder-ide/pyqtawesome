@@ -16,7 +16,7 @@ from urllib.request import urlopen
 
 import setuptools
 
-LOG_INFO = 2
+LOG_INFO = 20
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 INIT_PY_PATH = os.path.join(HERE, "qtawesome", "__init__.py")
@@ -77,10 +77,10 @@ def rename_font(font_path, font_name):
         )
 
 
-class UpdateFA5Command(setuptools.Command):
-    """A custom command to make updating FontAwesome 5.x easy!"""
+class UpdateFA6Command(setuptools.Command):
+    """A custom command to make updating FontAwesome 6.x easy!"""
 
-    description = "Try to update the FontAwesome 5.x data in the project."
+    description = "Try to update the FontAwesome 6.x data in the project."
     user_options = [
         ("fa-version=", None, "FA version."),
         ("zip-path=", None, "Read from local zip file path."),
@@ -92,10 +92,10 @@ class UpdateFA5Command(setuptools.Command):
         HERE,
         "qtawesome",
         "fonts",
-        "fontawesome5-{style}-webfont-charmap-{version}.json",
+        "fontawesome6-{style}-webfont-charmap-{version}.json",
     )
     TTF_PATH_TEMPLATE = os.path.join(
-        HERE, "qtawesome", "fonts", "fontawesome5-{style}-webfont-{version}.ttf"
+        HERE, "qtawesome", "fonts", "fontawesome6-{style}-webfont-{version}.ttf"
     )
     URL_TEMPLATE = (
         "https://github.com/FortAwesome/Font-Awesome/"
@@ -207,7 +207,7 @@ class UpdateFA5Command(setuptools.Command):
 
             # Fix to prevent repeated font names:
             if style in ("regular", "solid"):
-                new_name = str("Font Awesome 5 Free %s") % style.title()
+                new_name = str("Font Awesome 6 Free %s") % style.title()
                 self.__print('Renaming font to "%s" in: %s' % (new_name, font_path))
                 if ttLib is not None:
                     rename_font(font_path, new_name)
@@ -221,7 +221,6 @@ class UpdateFA5Command(setuptools.Command):
                 with open(font_path, "rb") as f:
                     data = f.read()
                     files[style] = data
-
             # Store hashes for later:
             hashes[style] = hashlib.md5(data).hexdigest()
 
@@ -233,11 +232,11 @@ class UpdateFA5Command(setuptools.Command):
         # We read it in full, then use regex substitution:
         for style, md5 in hashes.items():
             self.__print('New "%s" hash is: %s' % (style, md5))
-            regex = r"('fontawesome5-%s-webfont-%s.ttf':\s+)'(\w+)'" % (
+            regex = r'("fontawesome6-%s-webfont-%s.ttf":\s+)"(\w+)"' % (
                 style,
                 self.fa_version,
             )
-            subst = r"\g<1>'" + md5 + "'"
+            subst = r'\g<1>"' + md5 + '"'
             contents = re.sub(regex, subst, contents, 1)
         # and finally overwrite with the modified file:
         self.__print("Dumping updated file: %s" % init_path)
